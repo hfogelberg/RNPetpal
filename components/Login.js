@@ -71,21 +71,43 @@ class Login extends Component {
 
   onButtonPress() {
     console.log('On press');
-    fetch("http://localhost:3000/api/authenticate", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        username:   this.state.username,
-        password:   this.state.password
-      }
-    })
+
+    const url = "http://localhost:3000/api/dogs?username=" + this.state.username
+    fetch(url,  {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            username:   this.state.username,
+            password:   this.state.password
+          }
+        })
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        return '';
-      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
+
+
+
+  //   fetch("http://localhost:3000/api/authenticate", {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //       username:   this.state.username,
+  //       password:   this.state.password
+  //     }
+  //   })
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       console.log(responseJson);
+  //       return '';
+  //     })
+  // }
 }
 
 module.exports = Login;
