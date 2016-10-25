@@ -1,54 +1,75 @@
 import {StyleSheet} from 'react-native';
+import * as colors from '../constants/colors';
 
 export default StyleSheet.create({
   container: {
     flexDirection: 'column',
+    backgroundColor: colors.COLOR_BACKGROUND,
     flex: 1
   },
   formContainer: {
     flexDirection: 'column',
+    backgroundColor: colors.COLOR_BACKGROUND,
     flex: 1
   },
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: .3,
-    backgroundColor: 'orange'
+    backgroundColor: colors.COLOR_HEADER,
+    flex: .3
+  },
+  headerText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: colors.COLOR_HEADER_TEXT,
   },
   inputs: {
+    paddingTop: 20,
     flex: .7,
-    backgroundColor: 'yellow'
+    backgroundColor: colors.COLOR_BACKGROUND
 },
   inputContainer: {
     padding: 10,
-    height: 50,
-    borderWidth: 1,
-    borderBottomColor: '#CCC',
-    borderColor: 'transparent'
+    height: 60,
   },
   textInput: {
     position: 'absolute',
     left: 61,
-    top: 12,
-    right: 0,
-    height: 20,
-    fontSize: 14
+    top: 5,
+    right: 10,
+    fontSize: 24,
+    height: 30,
+    borderRadius: 10,
+    paddingLeft: 10,
+    backgroundColor: colors.COLOR_LATTE
+  },
+  centerButtonContainer: {
+    marginTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
-    marginTop: 30,
-    marginRight: 20,
-    marginRight: 20,
-    height: 60,
-    fontSize: 20,
-    color: 'green'
+    borderWidth: 1,
+    borderColor: colors.COLOR_LATTE,
+    height: 80,
+    width: 120,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.COLOR_SAVE_BUTTON
+  },
+  buttonText: {
+    color: colors.COLOR_LATTE,
+    fontSize: 20
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
     margin: 10,
   },
   icon: {
     height: 40,
-    width: 40
+    width: 40,
+    marginTop: -5
   },
 });

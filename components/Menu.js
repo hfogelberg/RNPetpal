@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListView } from 'react-native';
 import Button from 'react-native-button';
-import styles from '../styles/menu'
+import styles from '../styles/styles'
 
 var _navigate;
 

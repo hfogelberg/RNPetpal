@@ -1,7 +1,4 @@
-'use strict';
-//@flex
-
-import React  from 'react';
+import React, {Component }  from 'react';
 import {
   StyleSheet,
   View,
@@ -12,22 +9,24 @@ import {
 import Button from 'react-native-button';
 import styles from '../styles/styles';
 
-const Signup = React.createClass ({
-  getInitialState: function() {
-    return {
-      name: '',
-      username: '',
-      email: '',
-      password: ''
-    };
-  },
+class Signup extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        name: '',
+        emal: '',
+        username: '',
+        password: ''
+       };
+  }
 
   render() {
     return (
       <View style={styles.formContainer}>
         <View style={styles.header}>
-          <Text>Sign up</Text>
+          <Text style={styles.headerText}>Sign up</Text>
         </View>
+
         <View style={styles.inputs}>
           <View style={styles.inputContainer}>
             <Image
@@ -81,17 +80,15 @@ const Signup = React.createClass ({
             <Button
             style={styles.button}
             styleDisabled={styles.disabledButton}
-            onPress={() => this.saveItem()}>
+            onPress={() => this.onButtonPress()}>
             Save
           </Button>
         </View>
       </View>
     )
-  },
+  }
 
-  saveItem: function() {
-    console.log('Save item');
-
+  onButtonPress() {
     fetch("http://localhost:3000/api/users", {
       method: 'POST',
       headers: {
@@ -109,8 +106,8 @@ const Signup = React.createClass ({
       .then((responseJson) => {
         console.log(responseJson);
         return '';
-      });
+      })
   }
-})
+}
 
-export default Signup;
+module.expors = Signup;
