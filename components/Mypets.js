@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   AsyncStorage,
+  Image,
   StyleSheet,
   View,
   Text,
@@ -14,8 +15,12 @@ class Mypets extends Component {
 
   constructor(props) {
     super(props);
+    this,getMyPets =  this.getMyPets.bind(this);
     this.state = {
-      pets: []
+      pets: [],
+      statusText: '',
+      token: '',
+      userid: ''
     };
   }
 
@@ -70,10 +75,32 @@ class Mypets extends Component {
     .then((response) => response.json())
     .then((responseData) => {
         console.log(responseData);
-        const data = responseData.data;
-        this.setState({pets: data});
+
+        const message = responseData.message;
+        console.log('message: ' + message);
+        if (message == 'OK') {
+          console.log('Status is OK');
+        } else if (message === 'You must be logged in to do this.') {
+          console.log('Logged out');
+          AsyncStorage.removeItem('token', function(err){
+            AsyncStorage.removeItem('userid', function(err){
+              if (err) {console.log(err);}
+              console.log('Item removed');
+              this.props.navigator.push({id: 'Login'});
+            });
+          });
+        }
+
+        const pets = responseData.data;
+        this.setState({pets});
     })
-    .done();
+    .catch((error) => {
+      this.setState({
+        pets: [],
+        statusText: error
+      })
+      console.error(error);
+    });
   }
 
   onSelectPet(pet) {
@@ -87,25 +114,50 @@ class Mypets extends Component {
     });
   }
 
+  onCreatePet() {
+    this.props.navigator.push({id: 'Addpet'});
+  }
+
   iteratePets() {
-    return this.state.pets.map((pet) => {
+    console.log('Number of pets: ' + this.state.pets.length);
+    if (this.state.pets.length > 0){
+      return this.state.pets.map((pet) => {
+        return (
+          <View
+            key={pet._id}
+            style={styles.listItem}>
+            <TouchableOpacity
+              onPress={()=>this.onSelectPet(pet)}>
+              <Text style={styles.petName}>{pet.name}</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      });
+    } else {
       return (
-        <View
-          key={pet._id}
-          style={styles.listItem}>
-          <TouchableOpacity
-            onPress={()=>this.onSelectPet(pet)}>
-            <Text style={styles.petName}>{pet.name}</Text>
-          </TouchableOpacity>
+        <View style={styles.loadingView}>
+          <Text style={styles.loadingText}
+                numberOfLines={4}>
+            {this.state.statusText}
+          </Text>
         </View>
       )
-    });
+    }
   }
+
   render() {
     return (
       <View style = {styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerText}>My Pets</Text>
+        </View>
+
+        <View style={styles.newPetButtonContainer}>
+          <TouchableOpacity
+            onPress={()=>this.onCreatePet()}
+            style={styles.newPetButton}>
+            <Image source={require('../assets/Plus.png')}/>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.listContainer}>

@@ -102,7 +102,7 @@ class App extends Component {
           case 'Login':
             return (<Login navigator={navigator} />);
           case 'Mypets':
-            return (<Mypets navigator={navigator}/>);
+            return (<Mypets navigator={navigator} />);
           case 'Addpet':
             return (<Addpet navigator={navigator}/>);
           case 'About':

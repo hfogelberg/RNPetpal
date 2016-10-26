@@ -106,5 +106,25 @@ export default StyleSheet.create({
   },
   navBarLeftButton: {
     marginLeft: 10
-  }
+  },
+  newPetButtonContainer: {
+    alignItems: 'flex-end',
+    alignSelf: 'stretch',
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: -40
+  },
+  newPetButton: {
+
+  },
+  loadingView: {
+    flex: .4,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loadingText: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    justifyContent: 'center'
+  },
 });

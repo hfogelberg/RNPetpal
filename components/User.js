@@ -33,9 +33,11 @@ class User extends Component {
 
   onSignoutPress() {
     AsyncStorage.removeItem('token', function(err){
-      if (err) {console.log(err);}
-      console.log('Item removed');
-      this.props.navigator.push({id: 'Login'});
+      AsyncStorage.removeItem('userid', function(err){
+        if (err) {console.log(err);}
+        console.log('Item removed');
+        this.props.navigator.push({id: 'Login'});
+      });
     });
   }
 }
