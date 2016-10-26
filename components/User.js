@@ -35,8 +35,8 @@ class User extends Component {
     AsyncStorage.removeItem('token', function(err){
       if (err) {console.log(err);}
       console.log('Item removed');
-      // this.props.navigator.push({id: 'Login'});
-    });    
+      this.props.navigator.push({id: 'Login'});
+    });
   }
 }
 

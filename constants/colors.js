@@ -1,6 +1,7 @@
 export const COLOR_HEADER = '#1F9B76';
 export const COLOR_HEADER_TEXT = '#C2C1A5';
 export const COLOR_BACKGROUND = '#F4955A';
+ export const COLOR_LIST_ITEM = '#FF6200';
 export const COLOR_WHITE = '#FFFFFF';
 export const COLOR_BLACK = '#000000';
 export const COLOR_LATTE = '#F5F9E9';

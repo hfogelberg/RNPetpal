@@ -114,11 +114,14 @@ class Login extends Component {
       const data = responseJson.data;
       console.log('Data', data);
       const token = data.authToken;
+      const userid = data.userId;
 
       if (token) {
         try {
           console.log('Token: ' + token);
+          console.log('userId' +  userid);
           AsyncStorage.setItem('token', token);
+          AsyncStorage.setItem('userid', userid)
           this.props.navigator.push({id: 'Mypets'});
         } catch (error) {
           console.log(error);

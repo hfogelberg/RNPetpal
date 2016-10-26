@@ -24,9 +24,22 @@ export default StyleSheet.create({
     color: colors.COLOR_HEADER_TEXT,
   },
   listContainer: {
+    paddingLeft: 20,
     paddingTop: 20,
     flex: .7,
     backgroundColor: colors.COLOR_BACKGROUND
+  },
+  listItem: {
+    backgroundColor: colors.COLOR_LIST_ITEM,
+    padding: 5,
+    marginRight: 10,
+    borderRadius: 10,
+    height: 40
+  },
+  petName: {
+    color: colors.COLOR_HEADER_TEXT,
+    fontSize: 24,
+    fontWeight: 'bold'
   },
   inputs: {
     paddingTop: 20,
