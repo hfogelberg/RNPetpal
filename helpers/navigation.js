@@ -3,21 +3,17 @@ import _ from 'underscore';
 
 module.exports = function (scene) {
     var componentMap = {
-        'Signup': {
-          title: 'Signup',
-          id: 'Signup'
-        },
-        'Login': {
-          title: 'Login',
-          id: 'Login'
-        },
         'Mypets': {
-          title: 'Mypets',
+          title: 'My pets',
           id: 'Mypets'
         },
         'Addpet': {
           title: 'Addpet',
           id: 'Addpet'
+        },
+        'About': {
+          title: 'About',
+          id: 'About'
         }
     }
 

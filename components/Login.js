@@ -109,6 +109,7 @@ class Login extends Component {
         try {
           console.log('Token: ' + token);
           AsyncStorage.setItem('token', token);
+          this.props.navigator.push({id: 'Mypets'});
         } catch (error) {
           console.log(error);
         }
@@ -120,5 +121,6 @@ class Login extends Component {
       console.log(console.error);
     });
   }
+}
 
 module.exports = Login;
