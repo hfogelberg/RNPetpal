@@ -14,6 +14,10 @@ module.exports = function (scene) {
         'About': {
           title: 'About',
           id: 'About'
+        },
+        'User': {
+          title: 'User',
+          id: 'User'
         }
     }
 

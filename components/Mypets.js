@@ -8,6 +8,22 @@ import {
 import styles from '../styles/styles';
 
 class Mypets extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      pets: []
+    };
+  }
+
+  componentDidMount() {
+    this.getMyPets();
+  }
+
+  getMyPets() {
+    console.log('Get my pets');
+  }
+
   render() {
     return (
       <View style = {styles.container}>

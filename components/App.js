@@ -12,16 +12,29 @@ import {
 } from 'react-native';
 import Drawer from 'react-native-drawer';
 import { EventEmitter } from 'fbemitter';
+import navigationHelper from '../helpers/navigation';
 import styles from '../styles/styles';
 import Signup from './Signup';
 import Login from './Login';
 import Addpet from './Addpet';
 import Menu from './Menu';
 import Mypets from './Mypets';
+import User from './User';
 
 let _emitter = new EventEmitter();
 
 class App extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        initialRoute: {
+           id: 'Mypets',
+          title: 'My Pets',
+          index: 0
+        }
+      };
+    }
+
     componentDidMount() {
       var self = this;
 
@@ -35,28 +48,21 @@ class App extends Component {
       _emitter.addListener('back', () => {
           self._navigator.pop();
       });
+
+      // If there is a token go to Mypets, otherwise the login page on startup
+      AsyncStorage.getItem('token').then((token) => {
+        console.log('Token from storage: ' + token);
+        var initialRoute = {};
+        if (!token) {
+          console.log('No token. Go to login page');
+          this._navigator.push({id: 'Login'});
+        }
+
+        this.setState({initialRoute});
+      });
     }
 
     render() {
-
-      const token = AsyncStorage.getItem('token');
-      var initialRoute = {};
-
-      if (token) {
-        initialRoute = {
-          id: 'Mypets',
-          title: 'My Pets',
-          index: 0
-        };
-      } else {
-        initialRoute = {
-            id: 'Login',
-            title: '',
-            index: 0,
-            LeftButton: null
-        };
-      }
-
       return (
         <Drawer
             ref={(ref) => this._drawer = ref}
@@ -76,7 +82,7 @@ class App extends Component {
             <Navigator
                 ref={(ref) => this._navigator = ref}
                 configureScene={(route) => Navigator.SceneConfigs.FloatFromLeft}
-                initialRoute={initialRoute}
+                initialRoute={this.state.initialRoute}
                 renderScene={(route, navigator) => this._renderScene(route, navigator)}
                 navigationBar={
                     <Navigator.NavigationBar
@@ -100,6 +106,8 @@ class App extends Component {
             return (<Addpet navigator={navigator}/>);
           case 'About':
             return (<About navigator={navigator} />);
+          case 'User':
+            return (<User navigation={navigator} />);
         }
     }
 }
