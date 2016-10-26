@@ -3,6 +3,8 @@
 
 import React, { Component } from 'react';
 import {
+  AppRegistry,
+  AsyncStorage,
   StyleSheet,
   View,
   Text,
@@ -72,42 +74,51 @@ class Login extends Component {
   onButtonPress() {
     console.log('On press');
 
-    const url = "http://localhost:3000/api/dogs?username=" + this.state.username
-    fetch(url,  {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            username:   this.state.username,
-            password:   this.state.password
-          }
-        })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
+    const url = "http://localhost:3000/api/v1/login"
+
+    var details = {
+        'username': this.state.username,
+        'password': this.state.password
+    };
+
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formBody
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+
+      const data = responseJson.data;
+      console.log('Data', data);
+      const token = data.authToken;
+
+      if (token) {
+        try {
+          console.log('Token: ' + token);
+          AsyncStorage.setItem('token', token);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        console.log('No token');
+      }
     })
     .catch((error) => {
-      console.error(error);
+      console.log(console.error);
     });
   }
-
-
-
-  //   fetch("http://localhost:3000/api/authenticate", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json',
-  //       username:   this.state.username,
-  //       password:   this.state.password
-  //     }
-  //   })
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       console.log(responseJson);
-  //       return '';
-  //     })
-  // }
-}
 
 module.exports = Login;
