@@ -11,9 +11,13 @@ class Mypets extends Component {
   render() {
     return (
       <View style = {styles.container}>
-        <Text style={styles.text}>
-          My Pets
-        </Text>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>My Pets</Text>
+        </View>
+
+        <View style={styles.listContainer}>
+
+        </View>
       </View>
     )
   }

@@ -62,18 +62,28 @@ class Login extends Component {
               <TouchableHighlight
                 underlayColor='gray'
                 style = {styles.button}
-                onPress={() => this.onButtonPress()}>
+                onPress={() => this.onLoginButtonPress()}>
                   <Text style={styles.buttonText}>Log in</Text>
               </TouchableHighlight>
           </View>
+        </View>
+
+        <View style={styles.footer}>
+          <TouchableHighlight
+            style = {styles.footerStart}
+            onPress={()=>this.onSignupPress()}>
+              <Text style={styles.discreetButton} >Create Account</Text>
+          </TouchableHighlight>
         </View>
       </View>
     )
   }
 
-  onButtonPress() {
-    console.log('On press');
+  onSignupPress() {
+    this.props.navigator.push({id: 'Signup'});
+  }
 
+  onLoginButtonPress() {
     const url = "http://localhost:3000/api/v1/login"
 
     var details = {

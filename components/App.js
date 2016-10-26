@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {
+  AppRegistry,
+  AsyncStorage,
   StyleSheet,
   View,
   Text,
@@ -36,6 +38,25 @@ class App extends Component {
     }
 
     render() {
+
+      const token = AsyncStorage.getItem('token');
+      var initialRoute = {};
+
+      if (token) {
+        initialRoute = {
+          id: 'Mypets',
+          title: 'My Pets',
+          index: 0
+        };
+      } else {
+        initialRoute = {
+            id: 'Login',
+            title: '',
+            index: 0,
+            LeftButton: null
+        };
+      }
+
       return (
         <Drawer
             ref={(ref) => this._drawer = ref}
@@ -55,11 +76,7 @@ class App extends Component {
             <Navigator
                 ref={(ref) => this._navigator = ref}
                 configureScene={(route) => Navigator.SceneConfigs.FloatFromLeft}
-                initialRoute={{
-                    id: 'Login',
-                    title: '',
-                    index: 0
-                }}
+                initialRoute={initialRoute}
                 renderScene={(route, navigator) => this._renderScene(route, navigator)}
                 navigationBar={
                     <Navigator.NavigationBar
@@ -73,8 +90,10 @@ class App extends Component {
 
     _renderScene(route, navigator) {
         switch (route.id) {
+          case 'Signup':
+            return (<Signup navigator={navigator} />);
           case 'Login':
-          return (<Login navigator={navigator} />);
+            return (<Login navigator={navigator} />);
           case 'Mypets':
             return (<Mypets navigator={navigator}/>);
           case 'Addpet':
@@ -87,13 +106,20 @@ class App extends Component {
 
 const NavigationBarRouteMapper = {
     LeftButton(route, navigator, index, navState) {
-      return (
-        <TouchableOpacity
-          style={styles.navBarLeftButton}
-          onPress={() => {_emitter.emit('openMenu')}}>
-          <Image source={require('../assets/Menu.png')}/>
-        </TouchableOpacity>
-      )
+      switch(route.id) {
+        case 'Login':
+          return null;
+        case 'Signup':
+          return null;
+        default:
+          return (
+            <TouchableOpacity
+              style={styles.navBarLeftButton}
+              onPress={() => {_emitter.emit('openMenu')}}>
+              <Image source={require('../assets/Menu.png')}/>
+            </TouchableOpacity>
+          )
+      }
     },
 
     RightButton(route, navigator, index, navState) {

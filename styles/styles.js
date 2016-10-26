@@ -23,6 +23,11 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: colors.COLOR_HEADER_TEXT,
   },
+  listContainer: {
+    paddingTop: 20,
+    flex: .7,
+    backgroundColor: colors.COLOR_BACKGROUND
+  },
   inputs: {
     paddingTop: 20,
     flex: .7,
@@ -72,4 +77,20 @@ export default StyleSheet.create({
     width: 40,
     marginTop: -5
   },
+  footer: {
+    alignSelf: 'stretch',
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 10
+  },
+  footerLeftItem: {
+    alignItems: 'flex-start'
+  },
+  discreetButton: {
+    color: colors.COLOR_LATTE,
+    fontSize: 22
+  },
+  navBarLeftButton: {
+    marginLeft: 10
+  }
 });
