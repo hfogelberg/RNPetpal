@@ -5,7 +5,8 @@ import {
   StyleSheet,
   View,
   Text,
-  Navigator
+  Navigator,
+  TouchableOpacity
 } from 'react-native';
 import styles from '../styles/styles';
 
@@ -75,13 +76,27 @@ class Mypets extends Component {
     .done();
   }
 
+  onSelectPet(pet) {
+    console.log('onSelectPet ', pet);
+
+    this.props.navigator.push({
+      id: 'Pet',
+      passProps: {
+        pet: pet
+      }
+    });
+  }
+
   iteratePets() {
     return this.state.pets.map((pet) => {
       return (
         <View
           key={pet._id}
           style={styles.listItem}>
-          <Text style={styles.petName}>{pet.name}</Text>
+          <TouchableOpacity
+            onPress={()=>this.onSelectPet(pet)}>
+            <Text style={styles.petName}>{pet.name}</Text>
+          </TouchableOpacity>
         </View>
       )
     });

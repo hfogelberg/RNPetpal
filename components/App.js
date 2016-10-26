@@ -20,6 +20,7 @@ import Addpet from './Addpet';
 import Menu from './Menu';
 import Mypets from './Mypets';
 import User from './User';
+import Pet from './Pet';
 
 let _emitter = new EventEmitter();
 
@@ -108,6 +109,8 @@ class App extends Component {
             return (<About navigator={navigator} />);
           case 'User':
             return (<User navigation={navigator} />);
+          case 'Pet':
+            return (<Pet navigation={navigator} {...route.passProps} />);
         }
     }
 }

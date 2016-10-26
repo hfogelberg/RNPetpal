@@ -33,6 +33,7 @@ export default StyleSheet.create({
     backgroundColor: colors.COLOR_LIST_ITEM,
     padding: 5,
     marginRight: 10,
+    marginTop: 10,
     borderRadius: 10,
     height: 40
   },
