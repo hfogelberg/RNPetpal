@@ -9,7 +9,9 @@ import {
   Navigator
 } from 'react-native';
 import ModalPicker from 'react-native-modal-picker';
+import DatePicker from 'react-native-datepicker';
 import styles from '../styles/styles';
+import {COLOR_LATTE} from '../constants/colors';
 
 class Addpet extends Component {
   constructor(props) {
@@ -17,7 +19,8 @@ class Addpet extends Component {
     this.state = {
       petname: '',
       breed: '',
-      gender: ''
+      gender: '',
+      dobDate: ''
     }
   }
 
@@ -68,9 +71,34 @@ class Addpet extends Component {
 
             <View style={styles.inputContainer}>
               <Image
-                  source={require('../assets/monkey.png')}
+                  source={require('../assets/calendar.png')}
                   style={styles.icon}/>
-
+                  <DatePicker
+                    date = {this.state.date}
+                    mode = 'date'
+                    placeholder = 'Date of birth'
+                    format = 'YYYY-MM-DD'
+                    minDate = '2006-01-01'
+                    confirmBtnText = 'Confirm'
+                    cancelBtnText = 'Cancel'
+                    showIcon = {false}
+                    style = {styles.datePickerInput}
+                    customStyles = {{
+                      textinput: {
+                        top: 5,
+                        right: 10,
+                        fontSize: 24,
+                        height: 30,
+                        borderRadius: 10,
+                        paddingLeft: 10,
+                        backgroundColor: COLOR_LATTE
+                      },
+                      dateInput: {
+                        borderWidth: 0
+                      }
+                    }}
+                    onDateChange={(dobDate) => {this.setState({dobDate})}}
+                  />
             </View>
 
 

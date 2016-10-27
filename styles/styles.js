@@ -144,5 +144,24 @@ export default StyleSheet.create({
   },
   modal: {
     backgroundColor: colors.COLOR_MODAL
-  }
+  },
+  dateTextInput: {
+    top: 5,
+    right: 10,
+    fontSize: 24,
+    height: 30,
+    borderRadius: 10,
+    paddingLeft: 10,
+    backgroundColor: colors.COLOR_LATTE
+  },
+  datePickerInput: {
+    position: 'absolute',
+    left: 61,
+    top: 5,
+    right: 10,
+    height: 30,
+    borderRadius: 10,
+    paddingLeft: 10,
+    backgroundColor: colors.COLOR_LATTE
+  },
 });
