@@ -127,4 +127,22 @@ export default StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center'
   },
+  pickerContainer: {
+    padding: 10,
+    height: 60,
+    top: -40,
+  },
+  genderPicker: {
+    left: 61,
+    paddingRight: 60,
+    marginRight: 60,
+    right: 60,
+    fontSize: 24,
+    height: 30,
+    borderRadius: 10,
+    backgroundColor: colors.COLOR_LATTE
+  },
+  modal: {
+    backgroundColor: colors.COLOR_MODAL
+  }
 });

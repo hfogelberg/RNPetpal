@@ -15,7 +15,7 @@ class Mypets extends Component {
 
   constructor(props) {
     super(props);
-    this,getMyPets =  this.getMyPets.bind(this);
+    this.getMyPets =  this.getMyPets.bind(this);
     this.state = {
       pets: [],
       statusText: '',

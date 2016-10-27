@@ -6,6 +6,8 @@ export const COLOR_WHITE = '#FFFFFF';
 export const COLOR_BLACK = '#000000';
 export const COLOR_LATTE = '#F5F9E9';
 export const COLOR_SAVE_BUTTON = '#7AC45A';
+export const COLOR_MODAL = '#FF6200';
+export const COLOR_TEXT = '#F5F9E9';
 
 
 // export const COLOR_PURPLE = '#40477C';

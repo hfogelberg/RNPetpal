@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Navigator
 } from 'react-native';
+import ModalPicker from 'react-native-modal-picker';
 import styles from '../styles/styles';
 
 class Addpet extends Component {
@@ -25,6 +26,11 @@ class Addpet extends Component {
   }
 
   render() {
+    const genderOptions = [
+      {key: 0, label: 'Male'},
+      {key: 1, label: 'Femal'}
+    ];
+
     return (
       <View style = {styles.container}>
         <View style={styles.header}>
@@ -58,6 +64,16 @@ class Addpet extends Component {
                   onChangeText={(petname)=>this.setState({petname})}/>
             </View>
 
+
+
+            <View style={styles.inputContainer}>
+              <Image
+                  source={require('../assets/monkey.png')}
+                  style={styles.icon}/>
+
+            </View>
+
+
             <View style={styles.inputContainer}>
               <Image
                   source={require('../assets/monkey.png')}
@@ -75,13 +91,19 @@ class Addpet extends Component {
                 <Image
                     source={require('../assets/gender.png')}
                     style={styles.icon}/>
-                  <TextInput
-                      placeholder="Gender"
-                      style={styles.textInput}
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      autoFocus={false}
-                      onChangeText={(username)=>this.setState({username})}/>
+
+                    <ModalPicker
+                        data={genderOptions}
+                        initValue= {this.state.gender}
+                        onChange={(option)=>{ this.setState({gender:genderOptions.label})}}>
+
+                        <TextInput
+                            style={styles.genderPicker}
+                            editable={false}
+                            placeholder= 'Select gender'
+                            value={this.state.gender} />
+                    </ModalPicker>
+
               </View>
 
               <View style={styles.centerButtonContainer}>
