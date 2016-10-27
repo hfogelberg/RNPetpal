@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {
+  AppRegistry,
+  AsyncStorage,
   StyleSheet,
   View,
   Image,
@@ -17,6 +19,7 @@ class Addpet extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      animaltype: '',
       petname: '',
       breed: '',
       gender: '',
@@ -24,8 +27,75 @@ class Addpet extends Component {
     }
   }
 
+  componentDidMount() {
+    console.log('My pets');
+    AsyncStorage.getAllKeys((err, keys) => {
+      console.log(keys);
+      AsyncStorage.multiGet(keys, (err, stores) => {
+       stores.map((result, i, store) => {
+         // get at each store's key/value so you can work with it
+         let key = store[i][0];
+         let value = store[i][1];
+
+         console.log('Key ' + key);
+         console.log('Value: ' + value);
+
+         switch (key) {
+           case 'token':
+             this.setState({'token': value});
+            case 'userid':
+              this.setState({'userid': value}) ;
+         }
+        });
+      });
+
+        console.log('Token: ' +  this.state.token);
+        console.log('User id: ' +  this.state.userid);
+    });
+  }
+
   onSaveButtonPress() {
       console.log('Save pet');
+
+      console.log(this.state.petname);
+
+      var details = {
+          name: this.state.petname,
+          animaltype: this.state.animaltype,
+          breed: this.state.breed,
+          gender: this.state.gender,
+          dob: this.state.dobDate,
+          userId: this.state.userid
+      };
+
+      var formBody = [];
+      for (var property in details) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+
+      const url = 'http://localhost:3000/api/v1/pets'
+      fetch(url,
+        {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-Auth-Token': this.state.token,
+            'X-User-Id': this.state.userid
+          },
+          body: formBody
+        })
+      .then((response) => response.json())
+      .then((responseData) => {
+          console.log(responseData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   }
 
   render() {
@@ -51,7 +121,7 @@ class Addpet extends Component {
                   autoCapitalize="none"
                   autoCorrect={false}
                   autoFocus={false}
-                  onChangeText={(petname)=>this.setState({petname})}/>
+                  onChangeText={(animaltype)=>this.setState({animaltype})}/>
             </View>
 
           <View style={styles.inputContainer}>
